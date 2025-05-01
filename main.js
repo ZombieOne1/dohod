@@ -3,26 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
   }
-function loadSummary() {
-  fetch('https://script.google.com/macros/s/AKfycbw4yfG-UTN3T0iEamScnBr9nLDzA0ha2mQ9YAZAFAnxvnESgEKnlG_PJr8ZcUkRkNG0/exec')
-    .then(res => res.json())
-    .then(data => {
-      const summary = `
-        Доход: <b>${data.income.toFixed(2)} ₽</b><br>
-        Расход: <b>${data.expense.toFixed(2)} ₽</b><br>
-        Баланс: <b>${data.balance.toFixed(2)} ₽</b>
-      `;
-      document.getElementById('summary').innerHTML = summary;
 
-      let entriesHtml = '<h3>Последние записи</h3>';
-      data.entries.forEach(e => {
-        entriesHtml += `<div>${e.type}: ${e.category} — ${e.amount} ₽</div>`;
+  function loadSummary() {
+    fetch('https://script.google.com/macros/s/AKfycbz8vlJ0tPCE-YM7dgOHInUxtrQr4TtJDnoI_wbMdDrKYMR7-NV3UICNEUt5KB1Hff_3/exec')
+      .then(res => res.json())
+      .then(data => {
+        const summary = `
+          Доход: <b>${data.income.toFixed(2)} ₽</b><br>
+          Расход: <b>${data.expense.toFixed(2)} ₽</b><br>
+          Баланс: <b>${data.balance.toFixed(2)} ₽</b>
+        `;
+        document.getElementById('summary').innerHTML = summary;
+
+        let entriesHtml = '<h3>Последние записи</h3>';
+        data.entries.forEach(e => {
+          entriesHtml += `<div>${e.type}: ${e.category} — ${e.amount} ₽</div>`;
+        });
+
+        document.getElementById('recent').innerHTML = entriesHtml;
       });
+  }
 
-      document.getElementById('recent').innerHTML = entriesHtml;
-    });
-}
-  loadSummary();
   const submitBtn = document.getElementById('submit');
   submitBtn.addEventListener('click', () => {
     const type = document.getElementById('type').value;
@@ -35,7 +36,7 @@ function loadSummary() {
       return;
     }
 
-    fetch('https://script.google.com/macros/s/AKfycbw4yfG-UTN3T0iEamScnBr9nLDzA0ha2mQ9YAZAFAnxvnESgEKnlG_PJr8ZcUkRkNG0/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbz8vlJ0tPCE-YM7dgOHInUxtrQr4TtJDnoI_wbMdDrKYMR7-NV3UICNEUt5KB1Hff_3/exec', {
       method: 'POST',
       body: JSON.stringify({ type, category, amount }),
       headers: { 'Content-Type': 'application/json' }
@@ -45,9 +46,12 @@ function loadSummary() {
       statusDiv.textContent = "Успешно отправлено!";
       document.getElementById('category').value = '';
       document.getElementById('amount').value = '';
+      loadSummary();
     })
     .catch(err => {
       statusDiv.textContent = "Ошибка отправки данных.";
     });
   });
+
+  loadSummary();
 });
