@@ -35,11 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec', {
-      method: 'POST',
-      body: JSON.stringify({ type, category, amount }),
-      headers: { 'Content-Type': 'application/json' }
-    })
+    const formData = new URLSearchParams();
+formData.append("type", type);
+formData.append("category", category);
+formData.append("amount", amount);
+
+fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec', {
+  method: 'POST',
+  body: formData
+})
     .then(res => res.text())
     .then(data => {
       statusDiv.textContent = "Успешно отправлено!";
