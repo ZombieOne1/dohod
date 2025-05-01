@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch('URL_ТОЧКИ_ПРИЁМА_ДАННЫХ', {
+    fetch('https://script.google.com/macros/s/AKfycbw4yfG-UTN3T0iEamScnBr9nLDzA0ha2mQ9YAZAFAnxvnESgEKnlG_PJr8ZcUkRkNG0/exec', {
       method: 'POST',
       body: JSON.stringify({ type, category, amount }),
       headers: { 'Content-Type': 'application/json' }
