@@ -1,48 +1,47 @@
-
 document.addEventListener('DOMContentLoaded', () => {
-  if ('serviceWorker' в навигаторе) {
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
   }
 
-  функция loadSummary() {
+  function loadSummary() {
     fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec')
-      .тогда(res => res.json())
-      .тогда(данные => {
-        константа резюме = `
+      .then(res => res.json())
+      .then(data => {
+        const summary = `
           Доход: <b>${data.income.toFixed(2)} ₽</b><br>
           Расход: <b>${data.expense.toFixed(2)} ₽</b><br>
           Баланс: <b>${data.balance.toFixed(2)} ₽</b>
         `;
         document.getElementById('summary').innerHTML = summary;
 
-        let entersHtml = '<h3>Последние записи</h3>';
-        данные.записи.forEach(e => {
-          записиHtml += `<div>${e.date} — ${e.type}: ${e.category} — ${e.amount} ₽</div>`;
+        let entriesHtml = '<h3>Последние записи</h3>';
+        data.entries.forEach(e => {
+          entriesHtml += `<div>${e.date} — ${e.type}: ${e.category} — ${e.amount} ₽</div>`;
         });
 
-        document.getElementById('recent').innerHTML = записиHtml;
+        document.getElementById('recent').innerHTML = entriesHtml;
       });
   }
 
-  const submitBtn = document.getElementById('отправить');
+  const submitBtn = document.getElementById('submit');
   submitBtn.addEventListener('click', () => {
-    константный тип = document.getElementById('type').value;
+    const type = document.getElementById('type').value;
     const category = document.getElementById('category').value;
-    константа сумма = document.getElementById('amount').value;
+    const amount = document.getElementById('amount').value;
     const statusDiv = document.getElementById('status');
 
-    если (!категория || !количество) {
+    if (!category || !amount) {
       statusDiv.textContent = "Заполните все поля.";
-      возвращаться;
+      return;
     }
 
     fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec', {
-      метод: «ПОСТ»,
-      тело: JSON.stringify({ тип, категория, количество }),
-      заголовки: { 'Content-Type': 'application/json' }
+      method: 'POST',
+      body: JSON.stringify({ type, category, amount }),
+      headers: { 'Content-Type': 'application/json' }
     })
-    .тогда(res => res.текст())
-    .тогда(данные => {
+    .then(res => res.text())
+    .then(data => {
       statusDiv.textContent = "Успешно отправлено!";
       document.getElementById('category').value = '';
       document.getElementById('amount').value = '';
