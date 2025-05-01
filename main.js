@@ -42,8 +42,14 @@ formData.append("amount", amount);
 
 fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec', {
   method: 'POST',
-  body: JSON.stringify({ type, category, amount }),
-  headers: { 'Content-Type': 'application/json' }
+  body: JSON.stringify({
+    type: type,
+    category: category,
+    amount: amount
+  }),
+  headers: {
+    'Content-Type': 'application/json'
+  }
 })
     .then(res => res.text())
     .then(data => {
