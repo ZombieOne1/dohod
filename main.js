@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navigator.serviceWorker.register('service-worker.js');
   }
 function loadSummary() {
-  fetch('Тhttps://script.google.com/macros/s/AKfycbw4yfG-UTN3T0iEamScnBr9nLDzA0ha2mQ9YAZAFAnxvnESgEKnlG_PJr8ZcUkRkNG0/exec')
+  fetch('https://script.google.com/macros/s/AKfycbw4yfG-UTN3T0iEamScnBr9nLDzA0ha2mQ9YAZAFAnxvnESgEKnlG_PJr8ZcUkRkNG0/exec')
     .then(res => res.json())
     .then(data => {
       const summary = `
