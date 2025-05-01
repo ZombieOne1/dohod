@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function loadSummary() {
-    fetch('https://script.google.com/macros/s/AKfycbz8vlJ0tPCE-YM7dgOHInUxtrQr4TtJDnoI_wbMdDrKYMR7-NV3UICNEUt5KB1Hff_3/exec')
+    fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec')
       .then(res => res.json())
       .then(data => {
         const summary = `
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    fetch('https://script.google.com/macros/s/AKfycbz8vlJ0tPCE-YM7dgOHInUxtrQr4TtJDnoI_wbMdDrKYMR7-NV3UICNEUt5KB1Hff_3/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzWVSvH6HuaB6Qyw5D_YZ4NsxwMmW3esLZxHQfuGECyzzFA66873Br1T0uAq50m1xm8/exec', {
       method: 'POST',
       body: JSON.stringify({ type, category, amount }),
       headers: { 'Content-Type': 'application/json' }
