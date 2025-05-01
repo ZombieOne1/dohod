@@ -1,8 +1,8 @@
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open('finance-cache').then(cache => {
-      return cache.addAll([
+self.addEventListener('install', событие => {
+  событие.waitUntil(
+    кэши.open('finance-cache').then(cache => {
+      возврат кэша.addAll([
         '/',
         '/index.html',
         '/styles.css',
@@ -13,7 +13,7 @@ self.addEventListener('install', event => {
   );
 });
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+  событие.respondWith(
+    кэши.соответствие(событие.запрос).затем(ответ => ответ || выборка(событие.запрос))
   );
 });
