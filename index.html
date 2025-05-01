@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="theme-color" content="#ffffff"/>
+  <link rel="="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+  <title>Учёт финансов</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Учёт доходов и расходов</h1>
+    <select id="type">
+      <option value="Доход">Доход</option>
+      <option value="Расход">Расход</option>
+    </select>
+    <input type="text" id="category" placeholder="Статья">
+    <input type="number" id="amount" placeholder="Сумма" step="0.01">
+    <button id="submit">Добавить</button>
+    <div id="status"></div>
+    <h2>Баланс</h2>
+    <div id="summary">Загрузка...</div>
+  </div>
+</body>
+</html>
